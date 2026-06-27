@@ -4,6 +4,12 @@ A Shopify app built with the MERN stack that allows merchants to create announce
 
 ---
 
+## Live Demo
+
+**Render Deployment:** https://announcement-app-88ms.onrender.com
+
+---
+
 ## Features
 
 - Create announcements from the Shopify Admin.
@@ -66,10 +72,15 @@ cd announcement-app
 npm install
 ```
 
-### 3. Create a `.env` file
+Create a `.env` file and add:
 
 ```env
 MONGODB_URI=your_mongodb_connection_string
+SHOPIFY_API_KEY=your_api_key
+SHOPIFY_API_SECRET=your_api_secret
+SHOPIFY_APP_URL=your_app_url
+SCOPES=write_metaobject_definitions,write_metaobjects
+NODE_ENV=development
 ```
 
 ### 4. Start the development server

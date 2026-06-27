@@ -31,17 +31,13 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const data = await response.json();
   const shopId = data.data.shop.id;
 
-  // Get form data
   const formData = await request.formData();
   const announcement = formData.get("announcement") as string;
-
-  // Save to MongoDB
   await connectDB();
   await Announcement.create({
     announcement,
   });
 
-  // Save to Shopify Shop Metafield
   const metafieldResponse = await admin.graphql(
     `#graphql
     mutation MetafieldsSet($metafields: [MetafieldsSetInput!]!) {
@@ -75,14 +71,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     },
   );
 
-  const metafieldResult = await metafieldResponse.json();
-
-  console.log("Metafield Result:", JSON.stringify(metafieldResult, null, 2));
-
   return { success: true };
 };
 export default function Index() {
-  // const shopify = useAppBridge();
   const fetcher = useFetcher<typeof action>();
 
   return (

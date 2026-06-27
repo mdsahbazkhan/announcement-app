@@ -1,9 +1,11 @@
+import { useEffect } from "react";
 import type {
   ActionFunctionArgs,
   HeadersFunction,
   LoaderFunctionArgs,
 } from "react-router";
 import { useFetcher } from "react-router";
+import { useAppBridge } from "@shopify/app-bridge-react";
 
 import { connectDB } from "../db/mongoose.server";
 import Announcement from "../models/Announcement";
@@ -15,30 +17,27 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
   return null;
 };
+
 export const action = async ({ request }: ActionFunctionArgs) => {
   const { admin } = await authenticate.admin(request);
 
-  // Get shop details
-  const response = await admin.graphql(`
+  const shopResponse = await admin.graphql(`
     query {
       shop {
         id
-        name
       }
     }
   `);
-
-  const data = await response.json();
-  const shopId = data.data.shop.id;
+  const shopData = await shopResponse.json();
+  const shopId = shopData.data.shop.id;
 
   const formData = await request.formData();
   const announcement = formData.get("announcement") as string;
-  await connectDB();
-  await Announcement.create({
-    announcement,
-  });
 
-  const metafieldResponse = await admin.graphql(
+  await connectDB();
+  await Announcement.create({ announcement });
+
+  await admin.graphql(
     `#graphql
     mutation MetafieldsSet($metafields: [MetafieldsSetInput!]!) {
       metafieldsSet(metafields: $metafields) {
@@ -54,8 +53,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
           code
         }
       }
-    }
-    `,
+    }`,
     {
       variables: {
         metafields: [
@@ -73,25 +71,38 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   return { success: true };
 };
+
 export default function Index() {
   const fetcher = useFetcher<typeof action>();
+  const shopify = useAppBridge();
+
+  const isLoading = ["loading", "submitting"].includes(fetcher.state);
+
+  useEffect(() => {
+    if (fetcher.data?.success) {
+      shopify.toast.show("Announcement saved");
+    }
+  }, [fetcher.data, shopify]);
 
   return (
     <s-page heading="Announcement App">
       <fetcher.Form method="post">
-        <label htmlFor="announcement">Announcement</label>
-
-        <s-text-field
-          id="announcement"
-          name="announcement"
-          multiline="4"
-          placeholder="Enter announcement..."
-        />
-
-        <br />
-        <br />
-
-        <s-button type="submit">Save</s-button>
+        <s-section heading="Announcement Text">
+          <s-text-field
+            id="announcement"
+            name="announcement"
+            label="Announcement"
+            multiline="4"
+            placeholder="Enter your announcement text..."
+          />
+        </s-section>
+        <s-button
+          slot="primary-action"
+          type="submit"
+          {...(isLoading ? { loading: true } : {})}
+        >
+          Save
+        </s-button>
       </fetcher.Form>
     </s-page>
   );

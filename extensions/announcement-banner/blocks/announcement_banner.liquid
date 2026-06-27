@@ -1,0 +1,16 @@
+{% assign announcement = shop.metafields.my_app.announcement.value %}
+
+{% if announcement != blank %}
+<div id="announcement-banner">
+  📢 {{ announcement }}
+</div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Announcement Banner",
+  "target": "body",
+  "stylesheet": "announcement.css",
+  "settings": []
+}
+{% endschema %}

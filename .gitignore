@@ -18,6 +18,10 @@ node_modules/
 # Cache
 .cache
 .react-router/
+.mcp.json
+mcp.json
+gemini-extension.json
+
 
 # Shopify
 .shopify/

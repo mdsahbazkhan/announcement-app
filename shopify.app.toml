@@ -1,7 +1,7 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "ec8aaa65c0fcb3f555298c414c008855"
-application_url = "https://example.com"
+application_url = "https://announcement-app-88ms.onrender.com"
 embedded = true
 name = "announcement-app"
 
@@ -37,7 +37,9 @@ api_version = "2026-07"
   topics = [ "app/scopes_update" ]
 
 [auth]
-redirect_urls = [ "https://example.com/api/auth" ]
+redirect_urls = [
+  "https://announcement-app-88ms.onrender.com/api/auth"
+]
 
 [build]
 automatically_update_urls_on_dev = true

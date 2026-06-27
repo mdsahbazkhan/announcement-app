@@ -1,12 +1,14 @@
 import mongoose from "mongoose";
 
-const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/shopify-announcement";
+const MONGODB_URI = process.env.MONGODB_URI;
 
 let isConnected = false;
 
 export async function connectDB() {
   if (isConnected) return;
+  if (!MONGODB_URI) {
+    throw new Error("MONGODB_URI is missing");
+  }
 
   await mongoose.connect(MONGODB_URI);
 

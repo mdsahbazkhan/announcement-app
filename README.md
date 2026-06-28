@@ -72,14 +72,13 @@ cd announcement-app
 npm install
 ```
 
-Create a `.env` file and add:
+### 3. Create a `.env` file
 
 ```env
 MONGODB_URI=your_mongodb_connection_string
 SHOPIFY_API_KEY=your_api_key
 SHOPIFY_API_SECRET=your_api_secret
 SHOPIFY_APP_URL=your_app_url
-SCOPES=write_metaobject_definitions,write_metaobjects
 NODE_ENV=development
 ```
 
@@ -119,7 +118,6 @@ announcement-app/
 │
 ├── app/
 ├── extensions/
-├── prisma/
 ├── public/
 ├── package.json
 ├── shopify.app.toml

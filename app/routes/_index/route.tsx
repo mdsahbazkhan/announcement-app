@@ -21,34 +21,49 @@ export default function App() {
   return (
     <div className={styles.index}>
       <div className={styles.content}>
-        <h1 className={styles.heading}>A short heading about [your app]</h1>
+        <div className={styles.logo}>📢</div>
+        <h1 className={styles.heading}>Shopify Announcement Banner</h1>
         <p className={styles.text}>
-          A tagline about [your app] that describes your value proposition.
+          Display custom announcements on your storefront in seconds.
+          <br />
+          Set it once — your banner updates everywhere.
         </p>
+
         {showForm && (
           <Form className={styles.form} method="post" action="/auth/login">
             <label className={styles.label}>
-              <span>Shop domain</span>
-              <input className={styles.input} type="text" name="shop" />
-              <span>e.g: my-shop-domain.myshopify.com</span>
+              <span className={styles.labelText}>Shop domain</span>
+              <input
+                className={styles.input}
+                type="text"
+                name="shop"
+                placeholder="my-shop.myshopify.com"
+                autoComplete="off"
+              />
             </label>
             <button className={styles.button} type="submit">
-              Log in
+              Install App
             </button>
           </Form>
         )}
+
         <ul className={styles.list}>
-          <li>
-            <strong>Product feature</strong>. Some detail about your feature and
-            its benefit to your customer.
+          <li className={styles.listItem}>
+            <span className={styles.icon}>✏️</span>
+            <strong>Write once</strong>
+            <span>
+              Type your announcement in the Shopify Admin and hit Save.
+            </span>
           </li>
-          <li>
-            <strong>Product feature</strong>. Some detail about your feature and
-            its benefit to your customer.
+          <li className={styles.listItem}>
+            <span className={styles.icon}>⚡</span>
+            <strong>Instant sync</strong>
+            <span>Text is stored in a Shop Metafield via the GraphQL API.</span>
           </li>
-          <li>
-            <strong>Product feature</strong>. Some detail about your feature and
-            its benefit to your customer.
+          <li className={styles.listItem}>
+            <span className={styles.icon}>🌐</span>
+            <strong>Storefront banner</strong>
+            <span>A floating banner appears on every page of your store.</span>
           </li>
         </ul>
       </div>

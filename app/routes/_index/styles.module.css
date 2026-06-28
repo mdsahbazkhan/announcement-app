@@ -1,73 +1,143 @@
 .index {
-  align-items: center;
   display: flex;
+  align-items: center;
   justify-content: center;
-  height: 100%;
+  min-height: 100vh;
   width: 100%;
-  text-align: center;
-  padding: 1rem;
-}
-
-.heading,
-.text {
-  padding: 0;
-  margin: 0;
-}
-
-.text {
-  font-size: 1.2rem;
-  padding-bottom: 2rem;
+  background: #f6f6f7;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
 }
 
 .content {
-  display: grid;
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 640px;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e1e3e5;
+  border-radius: 12px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  text-align: center;
+}
+
+.logo {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.heading {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+  padding: 0;
+}
+
+.text {
+  font-size: 1rem;
+  color: #6d7175;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
 }
 
 .form {
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin: 0 auto;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 380px;
 }
 
 .label {
-  display: grid;
-  gap: 0.2rem;
-  max-width: 20rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
   text-align: left;
-  font-size: 1rem;
+}
+
+.labelText {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #1a1a1a;
 }
 
 .input {
-  padding: 0.4rem;
+  padding: 0.6rem 0.875rem;
+  border: 1px solid #c9cccf;
+  border-radius: 6px;
+  font-size: 0.9375rem;
+  color: #1a1a1a;
+  outline: none;
+  transition: border-color 0.15s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  border-color: #008060;
+  box-shadow: 0 0 0 2px rgba(0, 128, 96, 0.15);
 }
 
 .button {
-  padding: 0.4rem;
+  padding: 0.65rem 1.25rem;
+  background: #008060;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.button:hover {
+  background: #006e52;
 }
 
 .list {
   list-style: none;
   padding: 0;
-  padding-top: 3rem;
-  margin: 0;
+  margin: 0.5rem 0 0;
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
+  width: 100%;
 }
 
-.list > li {
-  max-width: 20rem;
-  text-align: left;
+.listItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 1;
+  background: #f6f6f7;
+  border: 1px solid #e1e3e5;
+  border-radius: 8px;
+  padding: 1.25rem 1rem;
+  font-size: 0.875rem;
+  color: #6d7175;
+  line-height: 1.5;
 }
 
-@media only screen and (max-width: 50rem) {
-  .list {
-    display: block;
+.listItem strong {
+  color: #1a1a1a;
+  font-size: 0.9375rem;
+}
+
+.icon {
+  font-size: 1.5rem;
+}
+
+@media only screen and (max-width: 48rem) {
+  .content {
+    padding: 2rem 1.25rem;
   }
 
-  .list > li {
-    padding-bottom: 1rem;
+  .list {
+    flex-direction: column;
   }
 }
